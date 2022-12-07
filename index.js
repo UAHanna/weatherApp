@@ -35,7 +35,8 @@ function showWeather(response) {
   let outside = document.querySelector("#now-outside");
   outside.innerHTML = response.data.weather[0].main;
   let temperature = document.querySelector("#now-temp");
-  temperature.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemperature = response.data.main.temp;
+  temperature.innerHTML = Math.round(celsiusTemperature);
   let wind = document.querySelector("#now-wind");
   wind.innerHTML = Math.round(response.data.wind.speed);
   let humidity = document.querySelector("#now-humidity");
@@ -47,6 +48,24 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
+
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#now-temp");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
+}
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
+
+function showCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperature = document.querySelector("#now-temp");
+  temperature.innerHTML = Math.round(celsiusTemperature);
+}
+let celsiusTemperature = null;
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsiusTemperature);
 
 function searchCity(city) {
   let apiKey = "f09d3949047ab6c9e3bcaf79cf61f619";
