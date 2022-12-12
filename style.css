@@ -56,13 +56,16 @@ h6 {
   color: #1b345a;
   margin: 0px 10px;
 }
+.weather-forecast-date {
+  font-size: 16px;
+  opacity: 0.5;
+}
 .temperature-max {
   font-size: 16px;
 }
 
 .temperature-min {
   font-size: 16px;
-
   opacity: 0.6;
 }
 
