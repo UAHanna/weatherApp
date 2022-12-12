@@ -56,6 +56,16 @@ h6 {
   color: #1b345a;
   margin: 0px 10px;
 }
+.temperature-max {
+  font-size: 16px;
+}
+
+.temperature-min {
+  font-size: 16px;
+
+  opacity: 0.6;
+}
+
 .day {
   font-size: 14px;
   color: #64c4ed;
