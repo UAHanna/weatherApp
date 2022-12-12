@@ -61,11 +61,11 @@ h6 {
   opacity: 0.5;
 }
 .temperature-max {
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .temperature-min {
-  font-size: 16px;
+  font-size: 13px;
   opacity: 0.6;
 }
 

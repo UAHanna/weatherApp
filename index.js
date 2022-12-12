@@ -29,6 +29,13 @@ let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 let day = days[now.getDay()];
 h3.innerHTML = `${day}, ${date} ${month} ${year}, <br>${hours}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function showWeather(response) {
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name;
@@ -99,21 +106,33 @@ currentLocationButton.addEventListener("click", currentLocation);
 searchCity("Kyiv");
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-        <div class="weather-forecast-date">${day}</div>
-        <i class="fa-solid fa-cloud"></i>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="44"
+        />
             <div class="temperature">
-              <span class="temperature-max">7°/ </span>
-              <span class="temperature-min">1° </span>
+              <span class="temperature-max">${Math.round(
+                forecastDay.temp.max
+              )}°/ </span>
+              <span class="temperature-min">${Math.round(
+                forecastDay.temp.min
+              )}° </span>
             </div>
       </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
